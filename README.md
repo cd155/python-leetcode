@@ -59,7 +59,7 @@ Using python to solve [Grind 75](https://www.techinterviewhandbook.org/grind75) 
 32. Clone Graph                                     Medium 25 mins
 33. Evaluate Reverse Polish Notation                Medium 30 mins
 
-(Week 3 Completed on March 20th, 2023)
+(Week 3 Completed on )
 
 ---
 
