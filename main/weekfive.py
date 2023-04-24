@@ -19,7 +19,7 @@ def bucket_sort(colors):
     if bucket[track] == 0:
       track += 1
 
-# two pointers
+# move 0 to left pointer, move 2 to right pointer
 def two_pointers_sort(colors):
   left = 0
   right = len(colors) - 1
@@ -30,7 +30,7 @@ def two_pointers_sort(colors):
       swap(colors, i, left)
       left += 1
       i += 1
-    elif colors[i] == 2:
+    elif colors[i] == 2: # moving 2 to right doesn't increase i
       swap(colors, i, right)
       right -= 1
     else:
