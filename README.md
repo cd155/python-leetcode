@@ -5,7 +5,7 @@ Using python to solve [Grind 75](https://www.techinterviewhandbook.org/grind75) 
 
 (Week 1 started on )
 
-[Week 1]()
+[Week 1](https://github.com/cd155/python-leetcode/blob/main/main/weekone.py)
 
 1. Two Sum	                                        Easy 15 mins
 2. Valid Parentheses	                              Easy 20 mins
@@ -59,7 +59,7 @@ Using python to solve [Grind 75](https://www.techinterviewhandbook.org/grind75) 
 32. Clone Graph                                     Medium 25 mins
 33. Evaluate Reverse Polish Notation                Medium 30 mins
 
-(Week 3 Completed on March 20th, 2023)
+(Week 3 Completed on )
 
 ---
 
