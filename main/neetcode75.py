@@ -1,74 +1,79 @@
 # reload import, put it in the terminal
 # from importlib import reload
 
-# 1. Two Sum
+'''
+1. Two Sum
+neetcode75.twoSum ([2,7,11,15], 9)        -> [2, 7]
+neetcode75.twoSumPairs([4,4,8,10,0,4], 8) -> [(5, 1), (2, 4)]
+'''
+def twoSumNeetcode(nums, target):
+  pass
 
-# weekone.two_sum ([2,7,11,15], 9) -> [2,7]
-def two_sum(nums, target):
-  my_dict = convert_dict(nums)
+def twoSum(nums, target):
+  myMap = convertDictWithCount(nums)
 
-  # find two sum in my_dict
+  # find two sum in myMap
   for num in nums:
-    other_half = target - num
-    if num == other_half and my_dict[num] <= 1:
+    otherHalf = target - num
+    if num == otherHalf and myMap[num] <= 1:
         continue
-    elif other_half in my_dict:
-      return [num, other_half]
+    elif otherHalf in myMap:
+      return [num, otherHalf]
 
-def convert_dict(nums):
-  my_dict = {}
+def convertDictWithCount(nums):
+  myMap = {} # key: num, value: count
 
   # build the dictionary
   for num in nums:
-    if num in my_dict: 
-      my_dict[num] += 1
+    if num in myMap: 
+      myMap[num] += 1
     else:
-      my_dict[num] = 1
-  return my_dict
+      myMap[num] = 1
+  return myMap
 
-# weekone.two_sum_pairs([4,4,8,10,0,4], 8) -> [(1,0), (2,4)]
-def two_sum_pairs(nums, target):
+def twoSumPairs(nums, target):
   pairs = []
-  my_dict = convert_dict_index(nums)
+  myMap = convertMapWithIndex(nums)
 
   # find two sum pairs
   for i in range(len(nums)):
-    other_half = target - nums[i]
-    if nums[i] == other_half:
-      if len(my_dict[nums[i]]) >= 2:
-        pairs.append((my_dict[nums[i]].pop(), my_dict[nums[i]].pop()))
+    otherHalf = target - nums[i]
+    if nums[i] == otherHalf:
+      if len(myMap[nums[i]]) >= 2:
+        pairs.append((myMap[nums[i]].pop(), myMap[nums[i]].pop()))
       else: continue
-    elif other_half in my_dict and len(my_dict[nums[i]]) >= 1:
-      pairs.append((i, my_dict[other_half].pop()))
+    elif otherHalf in myMap and len(myMap[nums[i]]) >= 1:
+      pairs.append((i, myMap[otherHalf].pop()))
 
   return pairs
 
 # use value to store indexes
-def convert_dict_index(nums):
-  my_dict = {}
+def convertMapWithIndex(nums):
+  myMap = {} # key: num, value: index
 
   # build the dictionary
   for i in range(len(nums)):
-    if nums[i] in my_dict: 
-      my_dict[nums[i]].append(i)
+    if nums[i] in myMap: 
+      myMap[nums[i]].append(i)
     else:
-      my_dict[nums[i]] = [i]
-  return my_dict
+      myMap[nums[i]] = [i]
+  return myMap
 
-# Valid Parentheses
-
-close_parens = {')':'(',
+'''
+Valid Parentheses
+neetcode75.valid_parens("(){[]}") -> True
+'''
+closeParens = {')':'(',
                 '}':'{',
                 ']':'['}
 
-# weekone.valid_parens("(){[]}") -> True
-def valid_parens(parens):
+def validParens(parens):
   stack = []
   for paren in parens:
-    if paren in close_parens:
+    if paren in closeParens:
       if stack == []:
         return False
-      elif stack.pop() != close_parens[paren]: 
+      elif stack.pop() != closeParens[paren]: 
         return False
     else:
       stack.append(paren)
@@ -78,16 +83,49 @@ def valid_parens(parens):
   else: 
     return False
 
-# 3. Sliding Window: Best Time to Buy and Sell Stock
-def maxProfit(prices):
-  l,r = 0,1
-  maxP = 0
+'''
+2. Sliding Window: Best Time to Buy and Sell Stock
 
-  while r < len(prices):
-    if prices[l] < prices[r]:
-      profit = prices[r] - prices[l]
-      maxP = max(maxP, profit)
+neetcode75.maxProfit([])          -> None
+neetcode75.maxProfit([7,6,4,3,1]) -> 0
+neetcode75.maxProfit([3,7,5,2,4]) -> 4
+'''
+def maxProfit(prices):
+  if prices == []: return
+
+  lowest, maxP = prices[0], 0
+
+  for i in range(len(prices)):
+    if prices[i] < lowest:
+      lowest = prices[i]
     else:
-      l = r
-    r += 1
+      maxP = max(maxP, (prices[i] - lowest))
+  
   return maxP
+
+'''
+3. Contains Duplicate
+
+neetcode75.isDuplicate([])      -> False
+neetcode75.isDuplicate([1,4,1]) -> True
+neetcode75.isDuplicate([5,3,6]) -> False
+'''
+def isDuplicate(nums):
+  mySet = set()
+
+  for num in nums:
+    if num in mySet:
+      return True
+    else:
+      mySet.add(num)
+
+  return False
+
+'''
+4. Product of Array Except Self
+
+neetcode75.isDuplicate([])        -> None
+neetcode75.isDuplicate([1,2,3,4]) -> [24,12,8,6]
+'''
+def productExceptSelf(nums):
+  pass
