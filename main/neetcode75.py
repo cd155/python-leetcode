@@ -55,7 +55,7 @@ def convert_dict_index(nums):
       my_dict[nums[i]] = [i]
   return my_dict
 
-# 2. Valid Parentheses
+# Valid Parentheses
 
 close_parens = {')':'(',
                 '}':'{',
@@ -77,3 +77,17 @@ def valid_parens(parens):
     return True
   else: 
     return False
+
+# 3. Sliding Window: Best Time to Buy and Sell Stock
+def maxProfit(prices):
+  l,r = 0,1
+  maxP = 0
+
+  while r < len(prices):
+    if prices[l] < prices[r]:
+      profit = prices[r] - prices[l]
+      maxP = max(maxP, profit)
+    else:
+      l = r
+    r += 1
+  return maxP
