@@ -142,7 +142,7 @@ def productExceptSelf(nums):
   return res
 
 '''
-5. Maximum Sub-array
+5. Maximum Sum Sub-array
 
 neetcode75.maxSubArray([])                    -> 0
 neetcode75.maxSubArray([-2,3,-1,4,-10,2,3,4]) -> 9
@@ -160,3 +160,22 @@ def maxSubArray(nums):
     maxS = max(maxS, curS)
 
   return maxS
+
+'''
+6. Maximum Product Sub-array
+
+neetcode75.maxProduct([2,3,-2,4]) -> 6
+neetcode75.maxProduct([-2,0,-1])  -> 0
+neetcode75.maxProduct([3,-1,4])   -> 4
+neetcode75.maxProduct([-2,-1,-3]) -> 3
+'''
+def maxProduct(nums):
+  res = max(nums)
+  curMin, curMax = 1, 1
+
+  for num in nums:
+    tmpMax, tmpMin = curMax * num, curMin * num
+    curMax, curMin = max(tmpMax, tmpMin, num), min(tmpMax, tmpMin, num)
+    print(curMax, curMin)
+    res = max(res, curMax)
+  return res
