@@ -154,7 +154,7 @@ def maxSubArray(nums):
   maxS, curS= nums[0], 0
 
   for num in nums:
-    if curS + < 0:
+    if curS < 0:
       curS = 0
     curS += num
     maxS = max(maxS, curS)
