@@ -124,8 +124,39 @@ def isDuplicate(nums):
 '''
 4. Product of Array Except Self
 
-neetcode75.isDuplicate([])        -> None
-neetcode75.isDuplicate([1,2,3,4]) -> [24,12,8,6]
+neetcode75.productExceptSelf([])        -> None
+neetcode75.productExceptSelf([2,3,4,5]) -> [60,40,30,24]
 '''
 def productExceptSelf(nums):
-  pass
+  res = len(nums) * [1]
+  prefix, postfix = 1, 1
+
+  for i in range(1,len(nums)):
+    prefix *= nums[i-1]
+    res[i] = prefix
+  
+  for i in reversed(range(0,len(nums)-1)):
+    postfix *= nums[i+1]
+    res[i] *= postfix
+
+  return res
+
+'''
+5. Maximum Sub-array
+
+neetcode75.maxSubArray([])                    -> 0
+neetcode75.maxSubArray([-2,3,-1,4,-10,2,3,4]) -> 9
+neetcode75.maxSubArray([-2,-1])               -> -1
+'''
+def maxSubArray(nums):
+  if nums == []: return 0
+
+  maxS, curS= nums[0], 0
+
+  for num in nums:
+    if curS + < 0:
+      curS = 0
+    curS += num
+    maxS = max(maxS, curS)
+
+  return maxS
