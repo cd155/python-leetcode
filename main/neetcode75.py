@@ -3,22 +3,31 @@
 
 '''
 1. Two Sum
-neetcode75.twoSum ([2,7,11,15], 9)        -> [2, 7]
-neetcode75.twoSumPairs([4,4,8,10,0,4], 8) -> [(5, 1), (2, 4)]
+neetcode75.twoSum([2,7,11,15], 9)        -> [2, 7]
+neetcode75.twoSumPairs([4,4,8,10,0,4], 8) -> [(5, 1), (2, 4), (4, 2)]
 '''
 def twoSumNeetcode(nums, target):
-  pass
+  hashMap = {}
+
+  for i, num in enumerate(nums):
+    diff = target - num
+    if diff in hashMap:
+      return hashMap[diff], i
+    else:
+      hashMap[num] = i
+  
+  return
 
 def twoSum(nums, target):
   myMap = convertDictWithCount(nums)
 
   # find two sum in myMap
   for num in nums:
-    otherHalf = target - num
-    if num == otherHalf and myMap[num] <= 1:
+    diff = target - num
+    if num == diff and myMap[num] <= 1:
         continue
-    elif otherHalf in myMap:
-      return [num, otherHalf]
+    elif diff in myMap:
+      return [num, diff]
 
 def convertDictWithCount(nums):
   myMap = {} # key: num, value: count
@@ -31,19 +40,39 @@ def convertDictWithCount(nums):
       myMap[num] = 1
   return myMap
 
+# return index of pairs
 def twoSumPairs(nums, target):
-  pairs = []
+  pairs = set()
   myMap = convertMapWithIndex(nums)
 
   # find two sum pairs
   for i in range(len(nums)):
-    otherHalf = target - nums[i]
-    if nums[i] == otherHalf:
+    diff = target - nums[i]
+    if nums[i] == diff:
       if len(myMap[nums[i]]) >= 2:
-        pairs.append((myMap[nums[i]].pop(), myMap[nums[i]].pop()))
-      else: continue
-    elif otherHalf in myMap and len(myMap[nums[i]]) >= 1:
-      pairs.append((i, myMap[otherHalf].pop()))
+        pairs.add((myMap[nums[i]].pop(), myMap[nums[i]].pop()))
+    elif diff in myMap and len(myMap[diff]) >= 1:
+      snd = myMap[diff].pop()
+      newPair = min(i, snd), max(i,snd)
+      pairs.add(newPair)
+
+  return pairs
+
+# return value of pairs
+def twoSumPairs1(nums, target):
+  pairs = set()
+  myMap = convertMapWithIndex(nums)
+
+  # find two sum pairs
+  for i in range(len(nums)):
+    diff = target - nums[i]
+    if nums[i] == diff:
+      if len(myMap[nums[i]]) >= 2:
+        pairs.add((nums[myMap[nums[i]].pop()], nums[myMap[nums[i]].pop()]))
+    elif diff in myMap and len(myMap[diff]) >= 1:
+      snd = myMap[diff].pop()
+      newPair = (min(nums[i], nums[snd]), max(nums[i], nums[snd]))        
+      pairs.add(newPair)
 
   return pairs
 
@@ -250,6 +279,15 @@ i != j, i != k, and j != k
 neetcode75.threeSum([-1,0,1,2,-1,-4]) -> [[-1,-1,2],[-1,0,1]]
 neetcode75.threeSum([0,1,1])          -> []
 neetcode75.threeSum([0,0,0])          -> [[0,0,0]]
+neetcode75.threeSum([-1,0,1,0])       -> 
 '''
 def threeSum(nums):
-  pass
+  res = set{}
+  for i, num in enumerate(nums):
+    diff = -num
+    restArr = nums[i+1:]
+    pairs = twoSumPairs1(restArr, diff) 
+    for pair in pairs:
+      res.add(sorted([num, pair[0], pair[1]]))
+
+  return res
