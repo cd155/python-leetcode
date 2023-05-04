@@ -176,6 +176,80 @@ def maxProduct(nums):
   for num in nums:
     tmpMax, tmpMin = curMax * num, curMin * num
     curMax, curMin = max(tmpMax, tmpMin, num), min(tmpMax, tmpMin, num)
-    print(curMax, curMin)
     res = max(res, curMax)
+
   return res
+
+'''
+7. Find Minimum in Rotated Sorted Array
+
+neetcode75.findMin([3,4,5,1,2])     -> 1
+neetcode75.findMin([4,5,6,7,0,1,2]) -> 0
+neetcode75.findMin([11,13,15,17])   -> 11
+'''
+
+def findTarget(nums, target): # binary search
+  l, r = 0, len(nums)
+
+  while(l != r):
+    mid = (r - l)//2 + l
+    if target <= nums[mid]:
+      r = mid
+    else:
+      l = mid + 1
+
+  return l # return index
+
+
+def findMin(nums):
+  l, r = 0, len(nums)-1
+
+  while(l != r):
+    mid = (r - l)//2 + l
+    if nums[l] <= nums[mid]: 
+      if nums[l] <= nums[r]:  # no rotate
+        r = mid
+      else:                   # rotated
+        l = mid + 1
+    else:
+      r = mid
+  
+  return nums[l] # return value
+
+'''
+8. Search in Rotated Sorted Array
+
+neetcode75.findTarget1([3,4,5,1,2], 2)    -> 4
+neetcode75.findTarget1([11,13,15,17], 13) -> 1
+neetcode75.findTarget1([4,5,1,2,3], 5)    -> 1
+'''
+def findTarget1(nums, target):
+  l, r = 0, len(nums)-1
+
+  while l != r:
+    mid = (r - l)//2 + l
+    if nums[l] <= nums[mid]: # left in order
+      if nums[l] <= target <= nums[mid]: # within l and mid
+        r = mid
+      else:
+        l = mid + 1
+    else: # right in order
+      if nums[mid] < target <= nums[r]: # within mid and r
+        l = mid + 1
+      else:
+        r = mid
+  
+  return l
+
+'''
+9. 3Sum
+  
+nums[i] + nums[j] + nums[k] == 0
+i != j, i != k, and j != k
+
+neetcode75.threeSum([-1,0,1,2,-1,-4]) -> [[-1,-1,2],[-1,0,1]]
+neetcode75.threeSum([0,1,1])          -> []
+neetcode75.threeSum([0,0,0])          -> [[0,0,0]]
+'''
+def threeSum(nums):
+  pass
