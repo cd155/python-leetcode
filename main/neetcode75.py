@@ -86,6 +86,7 @@ def convertMapWithIndex(nums):
       myMap[nums[i]].append(i)
     else:
       myMap[nums[i]] = [i]
+
   return myMap
 
 '''
@@ -282,12 +283,13 @@ neetcode75.threeSum([0,0,0])          -> [[0,0,0]]
 neetcode75.threeSum([-1,0,1,0])       -> 
 '''
 def threeSum(nums):
-  res = set{}
+  res = set()
   for i, num in enumerate(nums):
     diff = -num
     restArr = nums[i+1:]
     pairs = twoSumPairs1(restArr, diff) 
     for pair in pairs:
-      res.add(sorted([num, pair[0], pair[1]]))
+      newPair = tuple(sorted([num, pair[0], pair[1]]))
+      res.add(newPair)
 
   return res
