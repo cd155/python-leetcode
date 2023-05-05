@@ -4,7 +4,7 @@
 '''
 1. Two Sum
 neetcode75.twoSum([2,7,11,15], 9)        -> [2, 7]
-neetcode75.twoSumPairs([4,4,8,10,0,4], 8) -> [(5, 1), (2, 4), (4, 2)]
+neetcode75.twoSumPairs([4,4,8,10,0,4], 8) -> {(2, 4), (5, 1), (4, 2)}
 '''
 def twoSumNeetcode(nums, target):
   hashMap = {}
@@ -53,8 +53,7 @@ def twoSumPairs(nums, target):
         pairs.add((myMap[nums[i]].pop(), myMap[nums[i]].pop()))
     elif diff in myMap and len(myMap[diff]) >= 1:
       snd = myMap[diff].pop()
-      newPair = min(i, snd), max(i,snd)
-      pairs.add(newPair)
+      pairs.add((i, snd))
 
   return pairs
 
