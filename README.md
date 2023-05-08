@@ -1,88 +1,24 @@
 # python-leetcode
-Using python to solve [NeetCode 75](https://www.youtube.com/watch?v=KLlXCFG5TnA&list=PLot-Xpze53ldVwtstag2TL4HQhAnC8ATf&index=2&t=9s) leetcode questions
+Using python to solve [NeetCode 75](https://www.youtube.com/playlist?list=PLot-Xpze53ldVwtstag2TL4HQhAnC8ATf) leetcode questions
 
 ---
-
-(Week 1 started on May 2ed, 2023)
-
-[Week 1](https://github.com/cd155/python-leetcode/blob/main/main/weekone.py)
+[Solutions](https://github.com/cd155/python-leetcode/blob/main/main/neetcode75.py)
 
 1. Two Sum
 2. Sliding Window: Best Time to Buy and Sell Stock
 3. Contains Duplicate
-
-(Week 1 Completed on )
-
----
-
-(Week 2 Start on )
-
-[Week 2]()
-
-14. First Bad Version	              Easy	20 mins
-15. Ransom Note                     Easy	15 mins
-16. Climbing Stairs                 Easy	20 mins
-17. Longest Palindrome              Easy	20 mins
-18. Reverse Linked List             Easy	20 mins
-19. Majority Element                Easy	20 mins
-20. Add Binary	                    Easy	15 mins
-21. Diameter of Binary Tree	        Easy	30 mins
-22. Middle of the Linked List       Easy	20 mins
-23. Maximum Depth of Binary Tree    Easy    15 mins
-24. Contains Duplicate	            Easy    15 mins
-25. Maximum Sub-array               Medium  20 mins
-
-(Week 2 Completed on )
-
----
-
-(Week 3 started on )
-
-[Week3]()
-
-26. Insert Interval                                 Medium 25 mins
-27. 01 Matrix                                       Medium 30 mins
-28. Closest Points to Origin                        Medium 30 mins
-29. Longest Substring Without Repeating Characters  Medium 30 mins
-30. 3Sum                                            Medium 30 mins
-31. Binary Tree Level Order Traversal               Medium 20 mins
-32. Clone Graph                                     Medium 25 mins
-33. Evaluate Reverse Polish Notation                Medium 30 mins
-
-(Week 3 Completed on )
-
----
-
-(Week 4 started on )
-
-[Week4]()
-
-34. Course Schedule                 Medium·30 mins
-35. Implement Trie (Prefix Tree)    Medium·35 mins
-36. Coin Change                     Medium·25 mins
-37. Product of Array Except Self    Medium·30 mins
-38. Min Stack                       Medium·20 mins
-39. Validate Binary Search Tree     Medium·20 mins
-40. Number of Islands               Medium·25 mins
-41. Rotting Oranges                 Medium·30 mins
-
-(Week 4 Completed on )
-
----
-
-(Week 5 started on )
-
-[Week5]()
-
-42. Search in Rotated Sorted Array            Medium·30 mins
-43. Combination Sum                           Medium·30 mins
-44. Permutations                              Medium·30 mins
-45. Merge Intervals                           Medium·30 mins
-46. Lowest Common Ancestor of a Binary Tree   Medium·25 mins
-47. Time Based Key-Value Store                Medium·35 mins
-48. Accounts Merge                            Medium·30 mins
-49. Sort Colors                               Medium·25 mins
-
-(Week 5 Completed on Pending)
+4. Product of Array Except Self
+5. Maximum Sum Sub-array
+6. Maximum Product Sub-array
+7. Find Minimum in Rotated Sorted Array
+8. Search in Rotated Sorted Array
+9. 3 Sum
+10. Container with Most Water
+11. Number of 1 Bits
+12. Counting Bits
+13. Missing Number
+14. Reverse Bits
+15. Climb Stairs
+16. Coin Change
 
 ---
