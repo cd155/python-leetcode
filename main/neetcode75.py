@@ -292,3 +292,115 @@ def threeSum(nums):
       res.add(newPair)
 
   return res
+
+'''
+10. Container With Most Water
+
+neetcode75.maxArea([1,8,6,2,5,4,8,3,7]) -> 49
+neetcode75.maxArea([1,1]) -> 1
+'''
+def maxArea(nums):
+  l, r = 0, len(nums)-1
+  maxA = 0
+  while(l != r):
+    maxA = max(maxA, (r-l)*min(nums[l], nums[r]))
+    if nums[l] < nums[r]:
+      l += 1
+    else:
+      r -= 1
+
+  return maxA
+
+'''
+11. Number of 1 Bits
+
+neetcode75.hammingWeight(0b00000000000000000000000000001011) -> 3
+'''
+def hammingWeight(n):
+  res = 0
+  while(n != 0):
+    res += n % 2
+    n = n >> 1
+  
+  return res
+
+'''
+12. Counting Bits
+
+neetcode75.countBits(5) -> [0,1,1,2,1,2]
+'''
+def countBits(n):
+  res, offset, nextOffset = [0]*(n+1), 1, 2
+  
+  for i in range(n+1): 
+    if i == 0: continue
+    elif i < nextOffset: 
+      res[i] = 1 + res[i-offset]
+    else:
+      offset *= 2
+      nextOffset *= 2
+      res[i] = 1 + res[i-offset]
+  
+  return res
+
+'''
+13. Missing Number
+
+neetcode75.missingNumber([9,6,4,2,3,5,7,0,1]) -> 8
+'''
+def missingNumber(nums):
+  res = 0
+  for i in range(len(nums)+1):
+    res = res ^ i # ^ is the XOR in Python
+  
+  for num in nums:
+    res = res ^ num
+  
+  return res
+
+'''
+14. Reverse Bits
+
+neetcode75.reverseBits(0b00000010100101000001111010011100) -> 964176192
+neetcode75.reverseBits(0b00000000000000000000000000000100) -> 1
+'''
+def reverseBits(n):
+  res = 0
+  count = 0
+  while(count < 32):
+    bit = (n >> count) & 1 
+    res = bit << (31 - count) | res
+    count += 1
+  
+  return res
+
+'''
+15. Climbing Stairs
+
+neetcode75.climbStairs(3)     -> 3
+neetcode75.climbStairs(4)     -> 5
+neetcode75.climbStairsMemo(3) -> 3
+neetcode75.climbStairsMemo(4) -> 5
+'''
+def climbStairs(n):
+  if n == 0: return 1
+  elif n == 1: return 1
+
+  return climbStairs(n-2) + climbStairs(n-1)
+
+def climbStairsMemo(n):
+  res = [1, 2]
+
+  if n == 1: return 1
+  elif n == 2: return 2
+
+  for i in range(2, n):
+    res.append(res[i-2] + res[i-1])
+
+  return res[n-1]
+
+'''
+16. Coin Change
+
+neetcode75.coinChange([7,5,3,2], 34) -> [3,3,7,7,7,7]
+'''
