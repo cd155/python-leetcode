@@ -402,5 +402,48 @@ def climbStairsMemo(n):
 '''
 16. Coin Change
 
-neetcode75.coinChange([7,5,3,2], 34) -> [3,3,7,7,7,7]
+neetcode75.coinChangeCount([1], 0)         -> 0
+neetcode75.coinChangeCount([1,2,5], 11)    -> 3
+neetcode75.coinChangeCount([1,3,4,5], 7)   -> 2
+neetcode75.coinChangeValues([7,5,3,2], 34) -> [3,3,7,7,7,7]
 '''
+def coinChangeCount(coins, amount):
+  res = [0]
+
+  for smallAmount in range(1, amount+1):
+    numCoins = []
+    for coin in coins:
+      diff = smallAmount - coin
+      if (diff == 0):
+        numCoins.append(1)
+      elif (diff > 0 and res[diff] != -1):
+        numCoins.append(1 + res[diff])
+  
+    if numCoins: 
+      res.append(min(numCoins))
+    else:
+      res.append(-1)
+  
+  return res.pop()
+
+
+def coinChangeValues(coins, amount):
+  res = [[]]
+
+  for smallAmount in range(1, amount+1):
+    changes = []
+    for coin in coins:
+      diff = smallAmount - coin
+      if (diff == 0):
+        changes.append([coin])
+      elif (diff > 0 and res[diff]):
+        coinList = res[diff].copy()
+        coinList.append(coin)
+        changes.append(coinList)
+    
+    if changes:
+      res.append(min(changes, key=lambda x:len(x)))
+    else:
+      res.append([])
+    
+  return res.pop()
