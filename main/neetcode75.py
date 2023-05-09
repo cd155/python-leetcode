@@ -426,7 +426,6 @@ def coinChangeCount(coins, amount):
   
   return res.pop()
 
-
 def coinChangeValues(coins, amount):
   res = [[]]
 
@@ -442,7 +441,7 @@ def coinChangeValues(coins, amount):
         changes.append(coinList)
     
     if changes:
-      res.append(min(changes, key=lambda x:len(x)))
+      res.append(min(changes, key=lambda x: len(x)))
     else:
       res.append([])
     
