@@ -446,3 +446,34 @@ def coinChangeValues(coins, amount):
       res.append([])
     
   return res.pop()
+
+'''
+17. Longest Increasing Subsequence
+
+neetcode75.lengthOfLIS([1,2,4,3]) -> 3 
+neetcode75.lengthOfLIS([10,9,2,5,3,7,101,18]) -> 4
+neetcode75.lengthOfLIS([4,10,4,3,8,9]) -> 3
+neetcode75.longIncSubseq([4,10,4,3,8,9]) -> 
+  [[4, 8, 9], [10], [4, 8, 9], [3, 8, 9], [8, 9], [9]]
+'''
+def lengthOfLIS(nums):
+  res = [1]*len(nums)
+  for i in reversed(range(len(nums))):
+      for j in range(i+1, len(nums)):
+        if(nums[i] < nums[j]):
+          res[i] = max(res[i], 1+(res[j]))
+
+  return max(res)
+
+def longIncSubseq(nums):
+  res = [[]]*len(nums)
+
+  for i in reversed(range(len(nums))):
+    lstSeq = [[nums[i]]]
+    for j in range(i+1, len(nums)):
+      if(nums[i] < nums[j]):
+        lstSeq.append([nums[i]]+(res[j]))
+    maxLen = max(lstSeq, key=lambda x: len(x))
+    res[i] = res[i] + maxLen
+
+  return res
