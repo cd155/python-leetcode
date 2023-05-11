@@ -457,7 +457,7 @@ neetcode75.longIncSubseq([4,10,4,3,8,9]) ->
   [[4, 8, 9], [10], [4, 8, 9], [3, 8, 9], [8, 9], [9]]
 '''
 def lengthOfLIS(nums):
-  res = [1]*len(nums)
+  res = [1 for x in range(len(nums))]
   for i in reversed(range(len(nums))):
       for j in range(i+1, len(nums)):
         if(nums[i] < nums[j]):
@@ -466,7 +466,7 @@ def lengthOfLIS(nums):
   return max(res)
 
 def longIncSubseq(nums):
-  res = [[]]*len(nums)
+  res = [[] for x in range(len(nums))]
 
   for i in reversed(range(len(nums))):
     lstSeq = [[nums[i]]]
@@ -477,3 +477,49 @@ def longIncSubseq(nums):
     res[i] = res[i] + maxLen
 
   return res
+
+'''
+18. Longest Common Subsequence
+
+neetcode75.longComSubseq("adcde", "ade") = 3
+'''
+def longComSubseq(text1, text2):
+  r, c = len(text1), len(text2)
+  matrix = [[0 for x in range(c)] for y in range(r)]
+
+  for i in reversed(range(r)):
+    for j in reversed(range(c)):
+      if text1[i] == text2[j]:
+        diaVal = 0
+        if(i+1 < r) and (j+1 < c): # in matrix
+          diaVal = matrix[i+1][j+1] 
+        matrix[i][j] = 1 + diaVal
+      else:
+        rightVal, downVal = 0, 0
+        if(i+1 < r): # in matrix row
+          downVal = matrix[i+1][j]
+        if(j+1 < c): # in matrix column
+          rightVal = matrix[i][j+1]
+        matrix[i][j] = max(rightVal, downVal)
+
+  return matrix[0][0]
+
+'''
+19. Word Break
+
+neetcode75.wordBreak("leetcode", ["leet","code"]) = true
+neetcode75.wordBreak("applepenapple", ["apple","pen"]) = true
+neetcode75.wordBreak("catsandog", ["cats","dog","sand","and","cat"]) = false
+'''
+# my version, try neetcode version
+def wordBreak(s, wordDict):
+  res = [False]*len(s)
+  res.append(True)
+
+  for i in reversed(range(len(s))):
+    for j in range(i, len(s)):
+      if(s[i:j+1] in wordDict and res [j+1]):
+        res[i] = True
+        break
+
+  return res[0]
