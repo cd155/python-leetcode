@@ -510,8 +510,9 @@ def longComSubseq(text1, text2):
 neetcode75.wordBreak("leetcode", ["leet","code"]) = true
 neetcode75.wordBreak("applepenapple", ["apple","pen"]) = true
 neetcode75.wordBreak("catsandog", ["cats","dog","sand","and","cat"]) = false
+neetcode75.wordBreak1("cars", ["car","ca","rs"]) = false
 '''
-# my version, try neetcode version
+# my version, two pointers
 def wordBreak(s, wordDict):
   res = [False]*len(s)
   res.append(True)
@@ -521,5 +522,22 @@ def wordBreak(s, wordDict):
       if(s[i:j+1] in wordDict and res [j+1]):
         res[i] = True
         break
+
+  return res[0]
+
+# neetcode version, loop the dictionary 
+def wordBreak1(s, wordDict):
+  res = [False]*len(s)
+  res.append(True)
+
+  for i in reversed(range(len(s))):
+    for w in wordDict:
+      # print(i+len(w), len(s), s[i:i+len(w)], w)
+      if(i+len(w) <= len(s) and s[i:i+len(w)] == w):
+        if(res[i+len(w)]):
+          res[i] = True
+          break
+        else:
+          res[i] = False 
 
   return res[0]
