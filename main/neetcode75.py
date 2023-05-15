@@ -585,3 +585,30 @@ def combinationSum1(candidates, target):
   dfs(0,[])
 
   return res
+
+'''
+21. House Robber
+
+neetcode75.rob([1,2,3,1])   -> 4
+neetcode75.rob([2,7,9,3,1]) -> 12
+'''
+def rob(nums):
+  res = [0]*(len(nums)+2)
+  for i in reversed(range(0, len(nums))):
+    res[i] = max(res[i+1], nums[i] + res[i+2])
+
+  return res[0]
+
+'''
+22. House Robber II
+
+neetcode75.rob2([2,3,2])   -> 4
+neetcode75.rob2([1,2,3,1]) -> 4
+'''
+
+def rob2(nums):
+  if nums
+  res1 = rob(nums[1:])
+  res2 = rob(nums[0:(len(nums)-1)])
+
+  return max(res1, res2)
