@@ -510,7 +510,7 @@ def longComSubseq(text1, text2):
 neetcode75.wordBreak("leetcode", ["leet","code"]) = true
 neetcode75.wordBreak("applepenapple", ["apple","pen"]) = true
 neetcode75.wordBreak("catsandog", ["cats","dog","sand","and","cat"]) = false
-neetcode75.wordBreak1("cars", ["car","ca","rs"]) = false
+neetcode75.wordBreak1("cars", ["car","ca","rs"]) = true
 '''
 # my version, two pointers
 def wordBreak(s, wordDict):
@@ -541,3 +541,47 @@ def wordBreak1(s, wordDict):
           res[i] = False 
 
   return res[0]
+
+'''
+20. Combination Sum
+
+neetcode75.combinationSum([2,3,6,7], 7) -> [[2,2,3],[7]]
+'''
+def combinationSum(candidates, target):
+  res = []
+
+  def dfs(i, cur):
+    total = sum(cur)
+    if total == target: 
+      res.append(cur)
+      return
+
+    if len(cur) > 150 or i>= len(candidates) or  total > target: return
+
+    cur.append(candidates[i])
+    dfs(i, cur.copy())
+    cur.pop()
+    dfs(i+1, cur.copy())
+
+  dfs(0,[])
+
+  return res
+
+def combinationSum1(candidates, target):
+  res = []
+
+  def dfs(i, cur):
+    total = sum(cur)
+    if total == target: 
+      res.append(cur)
+      return
+    if i>= len(candidates) or total > target: return
+
+    for idx in range(i, len(candidates)):
+      cur.append(candidates[idx])
+      dfs(idx, cur.copy())
+      cur.pop() # pop cur once its dfs done, so we move to the next candidate
+
+  dfs(0,[])
+
+  return res
