@@ -607,8 +607,56 @@ neetcode75.rob2([1,2,3,1]) -> 4
 '''
 
 def rob2(nums):
-  if nums
+  if len(nums) == 1:
+    return nums[0]
+
   res1 = rob(nums[1:])
   res2 = rob(nums[0:(len(nums)-1)])
 
   return max(res1, res2)
+
+'''
+23. Decode Ways
+
+neetcode75.numDecodings("1123")   -> 5
+neetcode75.numDecodings("10")     -> 1
+neetcode75.numDecodings("120123") -> 3
+neetcode75.numDecodings("06")     -> 0
+'''
+def numDecodings(s):
+  size = len(s)
+  res = [0]*(size)
+  res.append(1)
+
+  for i in reversed(range(size)):
+    if s[i] == "0":
+      continue
+    else:
+      res[i] = res[i+1]
+
+    if i+1<size and int(s[i:i+2]) <= 26:
+      res[i] += res[i+2]
+
+  return res[0]
+
+def numDecodings1(s): # recursion version with cache
+  dp = {len(s): 1}
+
+  def dfs(i):
+    if i in dp: 
+      return dp[i]
+    
+    if s[i] == "0":
+      return 0
+
+    res = dfs(i+1)
+    if i+1<len(s) and int(s[i:i+2]) <= 26:
+      res += dfs(i+2)
+    dp[i] = res
+    return res
+
+  return dfs(0)
+
+'''
+
+'''
