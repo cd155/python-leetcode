@@ -20,5 +20,16 @@ Using python to solve [NeetCode 75](https://www.youtube.com/playlist?list=PLot-X
 14. Reverse Bits
 15. Climb Stairs
 16. Coin Change
+17. Longest Increasing Subsequence
+18. Longest Common Subsequence
+19. Word Break
+20. Combination Sum
+21. House Robber
+22. House Robber II
+23. Decode Ways
+24. Unique Paths
+25. Jump Game
+26. Clone Graph (need to review)
+27. Course Schedule
 
 ---
