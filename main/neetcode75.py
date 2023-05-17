@@ -674,3 +674,56 @@ def uniquePaths(m, n):
         mat[i][j] += mat[i][j-1]
   
   return mat[m-1][n-1]
+
+'''
+25. Jump Game
+
+neetcode75.canJump([2,3,1,1,4]) -> True
+'''
+def canJump(nums):
+  res = [False]*len(nums)
+  res[-1] = True
+
+  for idx in reversed(range(len(nums))):
+    for j in reversed(range(1, nums[idx]+1)): # extra time complexity
+      if idx+j < len(nums):
+        res[idx] = res[idx+j] or res[idx]
+      if res[idx]: break
+  
+  return res[0]
+
+# keep track the goal
+def canJumpNtime(nums):
+  goal = len(nums)-1
+
+  for idx in reversed(range(len(nums))):
+    if idx + nums[idx] >= goal:
+      goal = idx
+
+  return goal == 0
+
+'''
+26. Clone Graph (need review)
+'''
+def cloneGraph(node):
+  oldToNew = {}
+  
+  def clone(node):
+    if node in oldToNew:
+      return oldToNew[node]
+
+    copy = Node(node.val)
+    oldToNew[node] = copy
+
+    for nei in node.neighbors:
+      copy.neighbors.append(clone(nei))
+    
+    return copy
+
+  return clone(node)
+
+'''
+27. Course Schedule
+
+neetcode75.numCourses(2, [[1,0]]) -> True
+'''
