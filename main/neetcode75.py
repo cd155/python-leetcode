@@ -658,5 +658,19 @@ def numDecodings1(s): # recursion version with cache
   return dfs(0)
 
 '''
+24. Unique Paths
 
+neetcode75.uniquePaths(3, 7) -> 28
 '''
+def uniquePaths(m, n):
+  mat = [[0 for j in range(n)] for i in range(m)]
+  mat[0][0] = 1
+
+  for i in range(m):
+    for j in range(n):
+      if i > 0:
+        mat[i][j] += mat[i-1][j]
+      if j > 0:
+        mat[i][j] += mat[i][j-1]
+  
+  return mat[m-1][n-1]
