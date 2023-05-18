@@ -1,5 +1,5 @@
 # reload import, put it in the terminal
-# from importlib import reload
+from importlib import reload
 
 '''
 1. Two Sum
@@ -725,5 +725,37 @@ def cloneGraph(node):
 '''
 27. Course Schedule
 
-neetcode75.numCourses(2, [[1,0]]) -> True
+neetcode75.canFinish(2, [[1,0], [0,1]]) -> False
+neetcode75.canFinish(3, [[0,1],[0,2]])  -> True
+neetcode75.canFinish(3, [[0,1],[1,2]]) -> True
+neetcode75.canFinish(3, [[1,0],[2,1],[1,2]]) -> False
+'''
+def canFinish(numCourses, prerequisites):
+  hashMap = {course: [] for course in range(numCourses)}
+  for num, pre in prerequisites:
+    hashMap[num].append(pre)
+
+  visited = set()
+  def dfs(num):
+    if num in visited: 
+      return False
+
+    if hashMap[num] == []
+      return True
+    
+    visited.add(num)
+    for pre in hashMap[num]:
+        if not dfs(pre): return False
+
+    visited.remove(num)
+    hashMap[num] = []
+    return True
+
+  for num in hashMap:
+    if not dfs(num): return False
+
+  return True
+
+'''
+
 '''
