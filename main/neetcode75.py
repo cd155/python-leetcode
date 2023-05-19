@@ -740,7 +740,7 @@ def canFinish(numCourses, prerequisites):
     if num in visited: 
       return False
 
-    if hashMap[num] == []
+    if hashMap[num] == []:
       return True
     
     visited.add(num)
@@ -756,6 +756,32 @@ def canFinish(numCourses, prerequisites):
 
   return True
 
+def isCycleGraph(numCourses, prerequisites):
+  hashMap = {course: [] for course in range(numCourses)}
+  for num, pre in prerequisites:
+    hashMap[num].append(pre)
+
+  visited = set()
+  def dfs(num):
+    adj = hashMap[num]
+    if adj == []: return False
+
+    for pre in adj:
+      if pre in visited: 
+        return True
+      else:
+        visited.add(pre)
+        if dfs(pre): return True
+        visited.remove(pre)
+    hashMap[num] = []
+    return False  
+
+  for num in hashMap:
+    if dfs(num): return True
+
+  return False
+      
 '''
+28. Pacific Atlantic Water Flow
 
 '''
