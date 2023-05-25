@@ -793,11 +793,11 @@ def twoSides():
              [6,7,1,4,5], 
              [5,1,1,2,4]]
 
-  row, column = len(heights)-1, len(heights[0])-1
+  row, column = len(heights), len(heights[0])
   pac, alt = set(), set()
   
   def dfs(r, c, visited, preHeight):
-    if r > row or r < 0 or c > column or c < 0 or \
+    if r >= row or r < 0 or c >= column or c < 0 or \
        (r,c) in visited or \
        heights[r][c] < preHeight:
       return
@@ -808,13 +808,18 @@ def twoSides():
     dfs(r, c-1, visited, heights[r][c])
     dfs(r, c+1, visited, heights[r][c])
 
-  for c in range(column+1):
+  for c in range(column):
     dfs(0, c, pac, heights[0][c])
     dfs(row, c, alt, heights[row][c])
 
-  for r in range(row+1):
+  for r in range(row):
     dfs(r, 0, pac, heights[r][0])
     dfs(r, column, alt, heights[r][column])
 
   # print(pac, alt)
   return list(map(lambda x: list(x), pac.intersection(alt)))
+
+'''
+29. Numbers of Islands
+
+'''
