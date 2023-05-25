@@ -784,4 +784,37 @@ def isCycleGraph(numCourses, prerequisites):
 '''
 28. Pacific Atlantic Water Flow
 
+neetcode75.twoSides()
 '''
+def twoSides():
+  heights = [[1,2,2,3,5], 
+             [3,2,3,4,4], 
+             [2,4,5,3,1], 
+             [6,7,1,4,5], 
+             [5,1,1,2,4]]
+
+  row, column = len(heights)-1, len(heights[0])-1
+  pac, alt = set(), set()
+  
+  def dfs(r, c, visited, preHeight):
+    if r > row or r < 0 or c > column or c < 0 or \
+       (r,c) in visited or \
+       heights[r][c] < preHeight:
+      return
+
+    visited.add((r,c))
+    dfs(r-1, c, visited, heights[r][c])
+    dfs(r+1, c, visited, heights[r][c])
+    dfs(r, c-1, visited, heights[r][c])
+    dfs(r, c+1, visited, heights[r][c])
+
+  for c in range(column+1):
+    dfs(0, c, pac, heights[0][c])
+    dfs(row, c, alt, heights[row][c])
+
+  for r in range(row+1):
+    dfs(r, 0, pac, heights[r][0])
+    dfs(r, column, alt, heights[r][column])
+
+  # print(pac, alt)
+  return list(map(lambda x: list(x), pac.intersection(alt)))
