@@ -793,11 +793,11 @@ def twoSides():
              [6,7,1,4,5], 
              [5,1,1,2,4]]
 
-  row, column = len(heights), len(heights[0])
+  rows, columns = len(heights), len(heights[0])
   pac, alt = set(), set()
   
   def dfs(r, c, visited, preHeight):
-    if r >= row or r < 0 or c >= column or c < 0 or \
+    if r >= rows or r < 0 or c >= columns or c < 0 or \
        (r,c) in visited or \
        heights[r][c] < preHeight:
       return
@@ -808,13 +808,13 @@ def twoSides():
     dfs(r, c-1, visited, heights[r][c])
     dfs(r, c+1, visited, heights[r][c])
 
-  for c in range(column):
+  for c in range(columns):
     dfs(0, c, pac, heights[0][c])
-    dfs(row, c, alt, heights[row][c])
+    dfs(rows-1, c, alt, heights[rows-1][c])
 
-  for r in range(row):
+  for r in range(rows):
     dfs(r, 0, pac, heights[r][0])
-    dfs(r, column, alt, heights[r][column])
+    dfs(r, columns-1, alt, heights[r][columns-1])
 
   # print(pac, alt)
   return list(map(lambda x: list(x), pac.intersection(alt)))
@@ -822,4 +822,67 @@ def twoSides():
 '''
 29. Numbers of Islands
 
+neetcode75.numIslands()
 '''
+def numIslands(): # dfs
+  grid = [["1","1","0","0","0"],
+          ["1","1","0","0","0"],
+          ["0","0","1","0","0"],
+          ["0","0","0","1","1"]]
+  rows = len(grid)
+  columns = len(grid[0])
+
+  visited = set()
+  def dfs(r, c):
+    if r >= rows or r < 0 or c >= columns or c < 0 or \
+       (r,c) in visited or \
+       grid[r][c] != "1":
+      return
+
+    visited.add((r,c))
+    dfs(r-1, c)
+    dfs(r+1, c)
+    dfs(r, c-1)
+    dfs(r, c+1)
+  
+  res = 0
+  for r in range(rows):
+    for c in range(columns):
+      if grid[r][c] == "1" and (r,c) not in visited:
+        dfs(r, c)
+        res += 1
+
+  return res
+
+def numIslands2(): # bfs
+  grid = [["1","1","0","0","0"],
+          ["1","1","0","0","0"],
+          ["0","0","1","0","0"],
+          ["0","0","0","1","1"]]
+  rows = len(grid)
+  columns = len(grid[0])
+
+  visited = set()
+  def bfs(r, c):
+    myStack = [(r,c)]
+
+    while myStack != []:
+      r, c = myStack.pop()
+      if r >= rows or r < 0 or c >= columns or c < 0 or \
+         (r,c) in visited or \
+         grid[r][c] != "1":
+            continue
+      visited.add((r,c))
+      myStack.append((r-1, c))
+      myStack.append((r+1, c))
+      myStack.append((r, c-1))
+      myStack.append((r, c+1))
+  
+  res = 0
+  for r in range(rows):
+    for c in range(columns):
+      if grid[r][c] == "1" and (r,c) not in visited:
+        bfs(r, c)
+        res += 1
+
+  return res
