@@ -1032,6 +1032,8 @@ neetcode75.countComponents(5, [[0,1],[1,2],[3,4]]) -> 2
 neetcode75.countComponents(6, [[0,1],[1,2],[0,2],[3,4]]) -> 3
 neetcode75.unionFind(5, [[0,1],[1,2],[3,4],[2,3],[3,4]]) -> 2
 neetcode75.unionFind(6, [[0,1],[1,2],[0,2],[3,4]]) -> 3
+neetcode75.unionFind(4, [[1,2],[2,1],[0,3],[3,0],[2,3],[3,2]]) -> 1
+neetcode75.unionFind(4, [[0,3],[1,2],[2,1],[2,3],[3,0],[3,2]]) -> 1
 '''
 # dfs version O(v+e)
 def countComponents(n, edges):
@@ -1058,9 +1060,10 @@ def countComponents(n, edges):
   return res
 
 # union find version
+# neetcode75.unionFind(4, [[0,3],[1,2],[2,1],[2,3],[3,0],[3,2]]) -> 1
 def unionFind(n, edges):
   par = [i for i in range(n)] # initialize self parent nodes
-  rank = [1] * n
+  # rank = [1] * n
 
   # find its parent node
   def find(n1):
@@ -1073,12 +1076,39 @@ def unionFind(n, edges):
     p1, p2 = find(n1), find(n2)
     if p1 == p2: return 0
 
-    par[n2] = par[n1]
+    par[p2] = p1 # union happen on the root
+
     return 1
   
   res = n
   for n1, n2 in edges:
-    res -= union(n1, n2)
+    u = union(n1, n2)
+    res -= u
   
   return res
+
+# neetcode75.findNumProv([[1,1,0],[1,1,0],[0,0,1]]) -> 2
+# neetcode75.findNumProv([[1,0,0,1],[0,1,1,0],[0,1,1,1],[1,0,1,1]]) -> 1
+def findNumProv(matrix):
+  par = [i for i in range(len(matrix))]
+
+  def find(n):
+    res = n
+    while res != par[res]:
+      res = par[res]
+    return res
   
+  def union(n1, n2):
+    p1, p2 = find(n1), find(n2)
+    if p1 == p2: return 0
+    par[p2] = p1
+    return 1
+  
+  res = len(matrix)
+  for i in range(len(matrix)):
+    for j in range(len(matrix)):
+      if matrix[i][j] and i != j:
+        u = union(i, j)
+        res -= u
+  
+  return res
