@@ -1023,3 +1023,62 @@ def isValidTree(n, edges):
     return False  
 
   return not dfs(0, -1) and (len(visited) == n)
+
+'''
+33. Number of Connected Components in an Undirected Graph
+see leetcode 547
+
+neetcode75.countComponents(5, [[0,1],[1,2],[3,4]]) -> 2
+neetcode75.countComponents(6, [[0,1],[1,2],[0,2],[3,4]]) -> 3
+neetcode75.unionFind(5, [[0,1],[1,2],[3,4],[2,3],[3,4]]) -> 2
+neetcode75.unionFind(6, [[0,1],[1,2],[0,2],[3,4]]) -> 3
+'''
+# dfs version O(v+e)
+def countComponents(n, edges):
+  hashMap = {node: [] for node in range(n)}
+  for f, s in edges:
+    hashMap[f].append(s)
+    hashMap[s].append(f)
+  
+  visited = set()
+  def dfs(n):
+    if n in visited: return
+    visited.add(n)
+    if n not in hashMap: return
+    adjs = hashMap[n]
+    for adj in adjs:
+      dfs(adj)
+
+  res = 0
+  for node in hashMap:
+    if node not in visited:
+      res +=1
+      dfs(node)
+
+  return res
+
+# union find version
+def unionFind(n, edges):
+  par = [i for i in range(n)] # initialize self parent nodes
+  rank = [1] * n
+
+  # find its parent node
+  def find(n1):
+    res = n1
+    while res != par[res]: # res == par[res] means itself is a parent node
+      res = par[res]
+    return res
+
+  def union(n1, n2):
+    p1, p2 = find(n1), find(n2)
+    if p1 == p2: return 0
+
+    par[n2] = par[n1]
+    return 1
+  
+  res = n
+  for n1, n2 in edges:
+    res -= union(n1, n2)
+  
+  return res
+  
