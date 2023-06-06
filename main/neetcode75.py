@@ -954,7 +954,7 @@ def countSquares():
   return res
 
 '''
-Alien Dictionary: topological ordering
+31. Alien Dictionary: topological ordering
 
 neetcode75.alienOrder(["A", "BA", "BC", "C"])
 neetcode75.alienOrder(["ABC", "ACDE"])
@@ -995,6 +995,8 @@ def alienOrder(words):
   return visited
 
 '''
+32. Graph Valid Tree
+
 neetcode75.isValidTree(5, [[0, 1], [0, 2], [0, 3], [1, 4]]) -> True
 neetcode75.isValidTree(2, []) -> False
 neetcode75.isValidTree(1, []) -> True
