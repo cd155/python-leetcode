@@ -1020,4 +1020,4 @@ def isValidTree(n, edges):
 
     return False  
 
-  return not dfs(0, -1) and (list(visited) == [num for num in range(n)])
+  return not dfs(0, -1) and (len(visited) == n)
