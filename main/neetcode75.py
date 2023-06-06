@@ -1,5 +1,6 @@
 # reload import, put it in the terminal
 from importlib import reload
+import collections
 
 '''
 1. Two Sum
@@ -886,3 +887,137 @@ def numIslands2(): # bfs
         res += 1
 
   return res
+
+'''
+30. Longest Consecutive Sequence
+
+neetcode75.longestConsecutive([100,4,200,1,3,2])
+'''
+def longestConsecutive(nums):
+  setNums = set(nums)
+  maxL = 0
+
+  for num in setNums:
+    if (num-1) in setNums:
+      continue
+    else:
+      length = 0
+      head = num
+      while(head in setNums):
+        head += 1
+        length += 1
+      maxL = max(maxL, length)
+
+  return maxL
+'''
+Extra: Count Square Sub-matrices with All Ones
+
+neetcode75.countSquares() -> 15
+'''
+def countSquares():
+  grid = [[0,1,1,1],
+          [1,1,1,1],
+          [0,1,1,1]]
+  # grid = [[1,1,1],
+  #         [1,1,1]]
+  rows, columns = len(grid), len(grid[0])
+
+  def bfs(r, c):
+    layer = 0
+    que = collections.deque()
+    que.append([(r,c)])
+
+    while que:
+      batch = set()
+      outlayer = que.popleft()
+      for r,c in outlayer:
+        if r >= rows or c >= columns or grid[r][c] != 1:
+          return layer
+
+        if (r+1,c) not in outlayer:
+          batch.add((r+1,c))
+        if (r,c+1) not in outlayer:
+          batch.add((r,c+1))
+        batch.add((r+1,c+1))
+      que.append(list(batch))
+      layer += 1
+
+    return layer
+  
+  res = 0
+  for r in range(rows):
+    for c in range(columns):
+      if grid[r][c] == 1:
+        layer = bfs(r,c)
+        res += layer
+
+  return res
+
+'''
+Alien Dictionary: topological ordering
+
+neetcode75.alienOrder(["A", "BA", "BC", "C"])
+neetcode75.alienOrder(["ABC", "ACDE"])
+'''
+# assume they give use a valid dictionary
+def alienOrder(words):
+  adj = {c: set() for w in words for c in w}
+  
+  for i in range(len(words)-1):
+    w1, w2 = words[i], words[i+1]
+    lenMin = min(len(w1), len(w2))
+    for j in range(lenMin):
+      if w1[j] != w2[j]:
+        adj[w1[j]].add(w2[j])
+        break
+
+  onPath = [] # check the graph loop
+  visited = []
+  def dfs(c):
+    if c in onPath: 
+      return True
+
+    if c in visited: 
+      return False
+    
+    onPath.append(c)
+    for nei in adj[c]:
+      if dfs(nei):
+        return True
+    onPath.remove(c)
+    visited.append(c)
+
+  for c in adj:
+    if dfs(c):
+      return ""
+
+  visited.reverse()
+  return visited
+
+'''
+neetcode75.isValidTree(5, [[0, 1], [0, 2], [0, 3], [1, 4]]) -> True
+neetcode75.isValidTree(2, []) -> False
+neetcode75.isValidTree(1, []) -> True
+'''
+def isValidTree(n, edges):
+
+  hashMap = {num: [] for num in range(n)}
+  for f, s in edges:
+    hashMap[f].append(s)
+    hashMap[s].append(f)
+
+  visited = set()
+  def dfs(num, pre): #(if the graph has a loop)
+    if num in visited:
+      return True
+
+    visited.add(num)
+    adjs = hashMap[num]        
+    for adj in adjs:
+      if adj == pre: continue
+
+      if dfs(adj, num): return True
+
+    return False  
+
+  return not dfs(0, -1) and (list(visited) == [num for num in range(n)])
