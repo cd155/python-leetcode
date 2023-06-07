@@ -1112,3 +1112,26 @@ def findNumProv(matrix):
         res -= u
   
   return res
+
+'''
+34. Insert Interval
+
+neetcode75.insert([[1,3],[6,9]], [2,5]) -> [[1, 5], [6, 9]]
+neetcode75.insert([[1,3],[6,9]], [3,6]) -> [[1, 9]]
+'''
+def insert(intervals, newInterval):
+  insertS, insertE = newInterval
+  res = []
+  for i in range(len(intervals)):
+    s, e = intervals[i]
+    if insertE < s: 
+      res.append([insertS, insertE])
+      res.extend(intervals[i:])
+      return res
+    elif e < insertS: res.append([s,e])
+    else:
+      insertS = min(insertS, s)
+      insertE = max(insertE, e)
+  
+  res.append([insertS, insertE])
+  return res
