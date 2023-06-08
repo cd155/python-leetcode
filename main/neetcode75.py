@@ -1135,3 +1135,32 @@ def insert(intervals, newInterval):
   
   res.append([insertS, insertE])
   return res
+  
+'''
+35. Merge Intervals
+
+neetcode75.merge([[1,3],[2,6],[8,10],[15,18]]) -> [[1,6],[8,10],[15,18]]
+neetcode75.merge([[2,3],[2,2],[3,3],[1,3],[5,7],[2,2],[4,6]])
+neetcode75.merge([[1,3],[4,6],[5,7]])
+'''
+def merge(intervals):
+  res = []
+  intervals.sort(key=lambda x: x[0]) # O(nlogn)
+  newInterval = None
+  for s, e in intervals:
+    if newInterval == None:
+      newInterval = [s, e]
+      continue
+    insertS, insertE = newInterval
+
+    # if overlap
+    if (s >= insertS and s<=insertE) or (e >= insertS and e <=insertE):
+      newInterval = [min(insertS, s), max(insertE, e)]
+    else: # not overlap
+      res.append(newInterval)
+      newInterval = [s, e]
+
+  if newInterval: # append leftover
+    res.append(newInterval)
+  
+  return res
