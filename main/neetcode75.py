@@ -1146,7 +1146,7 @@ neetcode75.merge([[1,3],[4,6],[5,7]])
 def merge(intervals):
   res = []
   intervals.sort(key=lambda x: x[0]) # O(nlogn)
-  newInterval = None
+  newIntervalz = None
   for s, e in intervals:
     if newInterval == None:
       newInterval = [s, e]
@@ -1164,3 +1164,45 @@ def merge(intervals):
     res.append(newInterval)
   
   return res
+
+'''
+36. Non-overlapping Intervals
+
+neetcode75.eraseOverlapIntervals([[1,2],[2,3],[3,4],[1,3]]) -> 1
+'''
+def eraseOverlapIntervals(intervals):
+  # sorted by the start point
+  intervals.sort(key=lambda x: x[0])
+  #[1,2],[1,3],[2,3],[3,4]
+
+  res = 0
+  lastInterval = intervals[0]
+  for s, e in intervals[1:]:
+    lastEnd = lastInterval[1]
+    if lastEnd > s:
+      # over lap
+      res += 1
+      if e < lastEnd:
+        lastInterval = [s, e]
+    else:
+      # not overlap
+      lastInterval = [s, e]
+
+  return res
+
+'''
+37. Meeting Rooms
+
+neetcode75.canAttendMeetings([(0,30), (5,10), (15,20)]) -> False
+'''
+def canAttendMeetings(intervals):
+  intervals.sort(key=lambda x: x[0])
+  lastInterval = intervals[0]
+
+  for s, e in intervals[1:]:
+    lastEnd = lastInterval[1]
+    if lastEnd > s:
+      # overlap
+      return False
+  
+  return True
