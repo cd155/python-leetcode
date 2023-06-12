@@ -1206,3 +1206,29 @@ def canAttendMeetings(intervals):
       return False
   
   return True
+
+'''
+37. Meeting Rooms II
+
+neetcode75.minMeetingRooms([(0,30), (5,10), (15,20)]) -> 2
+neetcode75.minMeetingRooms([(1,3), (3,4)]) -> 1
+'''
+def minMeetingRooms(intervals):
+  intervals.sort(key=lambda x: x[0])
+  res = []
+
+  for s, e in intervals:
+
+    notOverlap = False
+    for i in range(len(res)):
+      existS, existE = res[i]
+      if (s <= existS and e <= existS) or (s >= existE and e >= existS):
+        # not overlap
+        res[i] = (s,e)
+        notOverlap = True
+        break
+
+    if not notOverlap:
+      res.append((s,e))
+
+  return len(res)
