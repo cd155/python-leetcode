@@ -1295,3 +1295,28 @@ def hasCycle(head):
       return True
 
   return False
+
+'''
+41. Merge Two Sorted Lists
+'''
+def mergeTwoLists(l1, l2):
+  dummy = ListNode()
+  p = dummy
+
+  while l1 and l2:
+    if l1.val < l2.val:
+      p.next = ListNode(l1.val)
+      l1 = l1.next
+      p = p.next
+    else:
+      p.next = ListNode(l2.val)
+      l2 = l2.next
+      p = p.next
+
+  if l1: 
+    p.next = l1
+
+  if l2:
+    p.next = l2
+
+  return dummy.next
