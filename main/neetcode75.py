@@ -1208,7 +1208,7 @@ def canAttendMeetings(intervals):
   return True
 
 '''
-37. Meeting Rooms II
+38. Meeting Rooms II
 
 neetcode75.minMeetingRooms([(0,30), (5,10), (15,20)]) -> 2
 neetcode75.minMeetingRooms([(1,3), (3,4)]) -> 1
@@ -1232,3 +1232,66 @@ def minMeetingRooms(intervals):
       res.append((s,e))
 
   return len(res)
+
+# try two pointers neetcode solution
+
+'''
+39. Reverse Linked List
+
+neetcode75.testNode(): 1 -> 2
+neetcode75.reverseListRec(neetcode75.testNode())
+'''
+class ListNode:
+  def __init__(self, val=0, next=None):
+    self.val = val
+    self.next = next
+
+def reverseList(head):
+  cur = head
+  res = None
+  while cur != None:
+    nxt = cur.next
+    cur.next = res
+    res = cur
+    cur = nxt
+  return res
+
+# not straight forward
+def reverseListRec(head):
+  if head == None:
+    return None
+
+  newHead = head
+  if head.next != None:
+    newHead = reverseListRec(head.next)
+    head.next.next = head
+  head.next = None
+
+  return newHead
+
+# 1 -> 2
+def testNode():
+  two = ListNode(2)
+  one = ListNode(1, two)
+
+  return one
+
+def printNode(head):
+  while head:
+    print(head.val)
+    head = head.next
+
+'''
+40. Linked List Cycle
+'''
+# Floyd's Tortoise & Hare algorithm, they will meet (at the same point)
+def hasCycle(head):
+  slow, fast = head, head
+
+  while fast and fast.next:
+    slow = slow.next
+    fast = fast.next.next
+    if slow == fast:
+      return True
+
+  return False
