@@ -1320,3 +1320,25 @@ def mergeTwoLists(l1, l2):
     p.next = l2
 
   return dummy.next
+
+'''
+42. Merge K Sorted Lists
+
+neetcode75.mergeKLists(neetcode75.test)
+'''
+test = [ListNode(5), ListNode(1), ListNode(3)]
+
+def mergeKLists(lists):
+  if lists == []: return None
+
+  while len(lists) > 1:
+    res = []
+    for i in range(0, len(lists), 2):
+      l1 = lists[i]
+      l2 = lists[i+1] if i+1 < len(lists) else None
+      res.append(mergeTwoLists(l1, l2))
+    lists = res 
+  
+  printNode(lists[0])
+
+  return lists[0]
