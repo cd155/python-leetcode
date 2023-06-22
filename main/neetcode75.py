@@ -407,6 +407,8 @@ neetcode75.coinChangeCount([1], 0)         -> 0
 neetcode75.coinChangeCount([1,2,5], 11)    -> 3
 neetcode75.coinChangeCount([1,3,4,5], 7)   -> 2
 neetcode75.coinChangeValues([7,5,3,2], 34) -> [3,3,7,7,7,7]
+neetcode75.coinChangeCountTD([1,3,4,5], 7) -> 2
+neetcode75.coinChangeCountTD([1], 0)       -> 0
 '''
 def coinChangeCount(coins, amount):
   res = [0]
@@ -449,6 +451,33 @@ def coinChangeValues(coins, amount):
       res.append([])
     
   return res.pop()
+
+def coinChangeCountTD(coins, amount):
+  cache = {}
+  if amount == 0: return 0
+
+  def dfs(coins, amount):
+    changes = []
+    for coin in coins:
+      diff = amount - coin
+      if diff > 0:
+        change = 0
+        if diff not in cache:
+          change = dfs(coins, diff)
+          cache[diff] = change
+        else:
+          change = cache[diff]
+        if change != -1:
+          changes.append(change + 1)
+      elif diff == 0:
+        changes.append(1)
+    
+    if changes:
+      return min(changes)
+    else:
+      return -1
+
+  return dfs(coins, amount)
 
 '''
 17. Longest Increasing Subsequence
