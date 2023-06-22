@@ -411,6 +411,8 @@ neetcode75.coinChangeValues([7,5,3,2], 34) -> [3,3,7,7,7,7]
 def coinChangeCount(coins, amount):
   res = [0]
 
+  # bottom up solution, solving smaller solution first
+  # solve DP[1], then DP[2], ..., final to DP[amount]
   for smallAmount in range(1, amount+1):
     numCoins = []
     for coin in coins:
