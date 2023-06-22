@@ -1326,8 +1326,6 @@ def mergeTwoLists(l1, l2):
 
 neetcode75.mergeKLists(neetcode75.test)
 '''
-test = [ListNode(5), ListNode(1), ListNode(3)]
-
 def mergeKLists(lists):
   if lists == []: return None
 
@@ -1342,3 +1340,31 @@ def mergeKLists(lists):
   printNode(lists[0])
 
   return lists[0]
+
+'''
+43. Remove Nth Node From End of List
+
+neetcode75.removeNthFromEnd(neetcode75.test, 2)
+neetcode75.removeNthFromEnd(neetcode75.test1, 1)
+'''
+test = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5))))) 
+test1 = ListNode(1) 
+
+def removeNthFromEnd(head, n):
+  dummy = ListNode(0, head)
+  left = dummy
+  right = head
+
+  for i in range(n):
+    if right: 
+      right = right.next
+    else:
+      break
+
+  while right:
+    left = left.next
+    right = right.next
+  
+  left.next = left.next.next
+
+  return dummy.next
