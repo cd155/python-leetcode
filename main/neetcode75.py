@@ -1379,7 +1379,8 @@ def mergeKLists(lists):
 neetcode75.removeNthFromEnd(neetcode75.test, 2)
 neetcode75.removeNthFromEnd(neetcode75.test1, 1)
 '''
-test = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5))))) 
+test =\
+  ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5))))) 
 test1 = ListNode(1) 
 
 def removeNthFromEnd(head, n):
@@ -1400,3 +1401,33 @@ def removeNthFromEnd(head, n):
   left.next = left.next.next
 
   return dummy.next
+
+'''
+44. Reorder List
+    L0 → L1 → … → Ln - 1 → Ln
+    L0 → Ln → L1 → Ln - 1 → L2 → Ln - 2 → …
+
+neetcode75.reorderList(neetcode75.test)
+'''
+def reorderList(head):
+  if head == None: return head
+
+  slow, fast = head, head.next
+
+  while fast and fast.next:
+    slow = slow.next
+    fast = fast.next.next
+  
+  second = slow.next
+  slow.next = None
+  reversedList = reverseList(second)
+  second = reversedList
+
+  first = head
+  while second:
+    temp1, temp2 = first.next, second.next
+    first.next = second
+    second.next = temp1
+    first, second = temp1, temp2
+  
+  printNode(head)
