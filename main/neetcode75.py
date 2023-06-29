@@ -1467,3 +1467,112 @@ def setZeroes(matrix):
     matrix[0] = [0]*len(matrix[i])
     
   return matrix
+
+'''
+46. Spiral Matrix
+
+neetcode75.spiralOrder([[1,2,3],[4,5,6],[7,8,9]]) 
+  -> [1,2,3,6,9,8,7,4,5]
+neetcode75.spiralOrder([[1,2],[3,4],[5,6]]) ->
+neetcode75.spiralOrder([[1], [2]]) ->
+'''
+def spiralOrder(matrix):
+  rowMax, colMax = len(matrix), len(matrix[0])
+  visited = [[False]*colMax for i in range(rowMax)]
+  visited[0][0] = True
+  res = [matrix[0][0]]
+  r, c = (0,0)
+
+  def loop(position):
+    r, c = position
+    resOneLoop = []
+
+    while c < colMax and visited[r][c] == False:
+      resOneLoop.append(matrix[r][c])
+      visited[r][c] = True
+      c += 1
+
+    c -= 1
+    if r+1 < rowMax:
+      r += 1
+
+    while r < rowMax and visited[r][c] == False:
+      resOneLoop.append(matrix[r][c])
+      visited[r][c] = True
+      r += 1
+
+    r -= 1
+    if c-1 >= 0:
+      c -= 1
+
+    while c >= 0 and visited[r][c] == False:
+      resOneLoop.append(matrix[r][c])
+      visited[r][c] = True
+      c -= 1
+    
+    c += 1
+    if r-1 >= 0:
+      r -= 1
+    while r >= 0 and visited[r][c] == False:
+      resOneLoop.append(matrix[r][c])
+      visited[r][c] = True
+      r -= 1
+    
+    res.extend(resOneLoop)
+
+    return (r+1,c)
+
+  if colMax == 1:
+    res = []
+    for lst in matrix: 
+       res.extend(lst)
+    return res
+
+  while c+1 < colMax and visited[r][c+1] == False:
+    r, c = loop((r,(c+1)))
+  
+  return res
+
+def spiralOrder2(matrix):
+  rowMax, colMax = len(matrix), len(matrix[0])
+  visited = [[False]*colMax for i in range(rowMax)]
+  res = []
+  r, c = (0,0)
+
+  def loop(position):
+    r, c = position
+    resOneLoop = []
+    
+    while c+1 < colMax and visited[r][c+1] == False:
+      resOneLoop.append(matrix[r][c])
+      visited[r][c] = True
+      c += 1
+
+    while r+1 < rowMax and visited[r+1][c] == False:
+      resOneLoop.append(matrix[r][c])
+      visited[r][c] = True
+      r += 1
+
+    while c-1 >= 0 and visited[r][c-1] == False:
+      resOneLoop.append(matrix[r][c])
+      visited[r][c] = True
+      c -= 1
+    
+    while r-1 >= 0 and visited[r-1][c] == False:
+      resOneLoop.append(matrix[r][c])
+      visited[r][c] = True
+      r -= 1
+    
+    res.extend(resOneLoop)
+
+    return (r,c)
+  
+  while c < colMax and visited[r][c] == False:
+    newR, newC = loop((r,c))
+    if (newR, newC) == (r,c):
+      res.append(matrix[r][c])
+      break
+    else:
+      r, c = newR, newC 
+
+  return res
