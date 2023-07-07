@@ -1602,3 +1602,40 @@ def spiralOrder3(matrix):
 
   return res
 
+'''
+47. Rotate Image
+
+neetcode75.rotate([[1,2,3],[4,5,6],[7,8,9]]) 
+  -> [[7,4,1],[8,5,2],[9,6,3]]
+'''
+def rotate(matrix):
+  size = len(matrix) - 1
+  start, end = 0, len(matrix)-1
+  while start < end: 
+    for i in range(start, end):
+      # next1 = matrix[i][size-start]
+      # next2 = matrix[size-start][size-i]
+      # next3 = matrix[size-i][start]
+      # next4 = matrix[start][i]
+
+      #1
+      store = matrix[i][size-start]
+      matrix[i][size-start] = matrix[start][i]
+
+      #2  
+      temp = matrix[size-start][size-i]
+      matrix[size-start][size-i] = store
+      store = temp
+
+      #3
+      temp = matrix[size-i][start]
+      matrix[size-i][start] = store
+      store = temp
+
+      #4
+      matrix[start][i] = store
+    
+    start += 1
+    end   -= 1
+
+  return matrix
