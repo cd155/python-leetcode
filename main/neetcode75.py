@@ -1576,3 +1576,29 @@ def spiralOrder2(matrix):
       r, c = newR, newC 
 
   return res
+
+def spiralOrder3(matrix):
+  top, down, left, right = 0, len(matrix), 0, len(matrix[0])
+  res = []
+  while left < right and top < down:
+    for i in range(left, right):
+      res.append(matrix[top][i])
+    top += 1
+
+    for i in range(top, down):
+      res.append(matrix[i][right-1])
+    right -= 1
+
+    if not(left < right and top < down):
+      break
+
+    for i in reversed(range(left, right)):
+      res.append(matrix[down-1][i])
+    down -= 1
+
+    for i in reversed(range(top, down)):
+      res.append(matrix[i][left])
+    left += 1
+
+  return res
+
