@@ -1639,3 +1639,44 @@ def rotate(matrix):
     end   -= 1
 
   return matrix
+
+'''
+48. Word Search
+
+neetcode75.exist
+([["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]], "ABCCED")
+  -> True
+
+neetcode75.exist(neetcode75.myBoard, neetcode75.words)
+'''
+myBoard = [["A","B","C","E"],["S","F","C","S"],["A","D","E","E"]]
+words = "ABCCED"
+
+def exist(board, words):
+  maxR, maxC, lenW = len(board), len(board[0]), len(words)
+  visited = set()
+
+  def dfs(cord, i):
+    row, col = cord
+    if i >= lenW: return True
+    if row < 0 or row >= maxR or col< 0 or col >= maxC: return False
+
+    if(board[row][col] == words[i] and (cord not in visited)):
+      visited.add(cord)
+      if dfs((row+1, col), i+1):   return True
+      elif dfs((row-1, col), i+1): return True
+      elif dfs((row, col+1), i+1): return True
+      elif dfs((row, col-1), i+1): return True
+      else:
+        visited.remove(cord)
+        return False
+    else:
+      return False
+
+  for i in range(maxR):
+    for j in range(maxC):
+      visited = set()
+      if dfs((i,j),0):
+        return True
+
+  return False
