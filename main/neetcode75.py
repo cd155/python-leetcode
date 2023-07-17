@@ -1675,7 +1675,7 @@ def exist(board, word):
 
   for i in range(maxR):
     for j in range(maxC):
-      visited = set()
+      visited = []
       if dfs((i,j),0):
         return True # visited is the path
 
