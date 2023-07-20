@@ -1681,4 +1681,28 @@ def exist(board, word):
 
   return False
 
+def existNeet(board, words):
+  # almost the same
+  pass
 
+'''
+
+49. Longest Substring Without Repeating Characters (sliding window)
+
+neetcode75.lenLongSubstr("dvdf") -> 3
+'''
+def lenLongSubstr(word):
+  que, maxW = collections.deque(), 0
+
+  for c in word:
+    if c in que:
+      maxW = max(maxW, len(que))
+
+    while c in que:
+      que.popleft()
+    
+    que.append(c)
+  
+  maxW = max(maxW, len(que))
+
+  return maxW
