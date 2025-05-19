@@ -1,5 +1,7 @@
 import unittest
-from neetcode75 import two_sum_return_values, two_sum_return_indexes, two_sum_return_all_index_pairs
+from neetcode75 import \
+    two_sum_return_values, two_sum_return_indexes, two_sum_return_all_index_pairs, \
+    valid_parentheses
 
 class TestTwoSum(unittest.TestCase):
 
@@ -15,6 +17,14 @@ class TestTwoSum(unittest.TestCase):
 
     def test_two_sum_values(self):
         self.assertEqual(two_sum_return_values([2,7,11,15], 9) , (2, 7))
+
+class TestValidParentheses(unittest.TestCase):
+
+    def test_valid_parentheses(self):
+        self.assertEqual(valid_parentheses('()'), True)
+        self.assertEqual(valid_parentheses('{()[]}'), True)
+        self.assertEqual(valid_parentheses('{(]}'), False)
+        self.assertEqual(valid_parentheses('([])'), True)
 
 if __name__ == '__main__':
     unittest.main()

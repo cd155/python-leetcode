@@ -43,17 +43,21 @@ def two_sum_return_values(nums, target):
   
   return
 
-
-
 '''
-Valid Parentheses
-neetcode75.valid_parens("(){[]}") -> True
+53. Valid Parentheses
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
 '''
 closeParens = {')':'(',
                 '}':'{',
                 ']':'['}
 
-def validParens(parens):
+def valid_parentheses(parens):
   stack = []
   for paren in parens:
     if paren in closeParens:
@@ -64,10 +68,7 @@ def validParens(parens):
     else:
       stack.append(paren)
 
-  if stack == []: 
-    return True
-  else: 
-    return False
+  return stack == []
 
 '''
 2. Sliding Window: Best Time to Buy and Sell Stock
