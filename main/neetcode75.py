@@ -88,7 +88,7 @@ def max_profit(prices):
     else:
       maxP = max(maxP, (prices[i] - lowest))
   
-  return maxP
+  return maxP #
 
 '''
 3. Contains Duplicate
