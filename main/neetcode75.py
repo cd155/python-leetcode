@@ -1,93 +1,49 @@
-# reload import, put it in the terminal
-from importlib import reload
 import collections
 
 '''
 1. Two Sum
-neetcode75.twoSum([2,7,11,15], 9)        -> [2, 7]
-neetcode75.twoSumPairs([4,4,8,10,0,4], 8) -> {(2, 4), (5, 1), (4, 2)}
+Given an array of integers nums and an integer target, return the indices i and j such that nums[i] + nums[j] == target and i != j.
+
+You may assume that every input has exactly one pair of indices i and j that satisfy the condition.
+Return the answer with the smaller index first.
 '''
-def twoSumNeetcode(nums, target):
-  hashMap = {}
+def two_sum_return_indexes(nums, target):
+  hash_map = {}
 
   for i, num in enumerate(nums):
-    diff = target - num
-    if diff in hashMap:
-      return hashMap[diff], i
-    else:
-      hashMap[num] = i
+      diff = target - num
+      if diff in hash_map:
+          return hash_map[diff], i
+      else:
+          hash_map[num] = i
   
   return
 
-def twoSum(nums, target):
-  myMap = convertDictWithCount(nums)
+def two_sum_return_all_index_pairs(nums, target):
+  hash_map = {}
+  result = []
+  for i, num in enumerate(nums):
+    diff = target - num
+    if diff in hash_map:
+      result.append([hash_map[diff], i])
+    if num not in hash_map:
+      hash_map[num] = i
+  
+  return result
 
-  # find two sum in myMap
+def two_sum_return_values(nums, target):
+  pool = []
+
   for num in nums:
     diff = target - num
-    if num == diff and myMap[num] <= 1:
-        continue
-    elif diff in myMap:
-      return [num, diff]
-
-def convertDictWithCount(nums):
-  myMap = {} # key: num, value: count
-
-  # build the dictionary
-  for num in nums:
-    if num in myMap: 
-      myMap[num] += 1
+    if diff in pool:
+      return diff, num
     else:
-      myMap[num] = 1
-  return myMap
+      pool.append(num)
+  
+  return
 
-# return index of pairs
-def twoSumPairs(nums, target):
-  pairs = set()
-  myMap = convertMapWithIndex(nums)
 
-  # find two sum pairs
-  for i in range(len(nums)):
-    diff = target - nums[i]
-    if nums[i] == diff:
-      if len(myMap[nums[i]]) >= 2:
-        pairs.add((myMap[nums[i]].pop(), myMap[nums[i]].pop()))
-    elif diff in myMap and len(myMap[diff]) >= 1:
-      snd = myMap[diff].pop()
-      pairs.add((i, snd))
-
-  return pairs
-
-# return value of pairs
-def twoSumPairs1(nums, target):
-  pairs = set()
-  myMap = convertMapWithIndex(nums)
-
-  # find two sum pairs
-  for i in range(len(nums)):
-    diff = target - nums[i]
-    if nums[i] == diff:
-      if len(myMap[nums[i]]) >= 2:
-        pairs.add((nums[myMap[nums[i]].pop()], nums[myMap[nums[i]].pop()]))
-    elif diff in myMap and len(myMap[diff]) >= 1:
-      snd = myMap[diff].pop()
-      newPair = (min(nums[i], nums[snd]), max(nums[i], nums[snd]))        
-      pairs.add(newPair)
-
-  return pairs
-
-# use value to store indexes
-def convertMapWithIndex(nums):
-  myMap = {} # key: num, value: index
-
-  # build the dictionary
-  for i in range(len(nums)):
-    if nums[i] in myMap: 
-      myMap[nums[i]].append(i)
-    else:
-      myMap[nums[i]] = [i]
-
-  return myMap
 
 '''
 Valid Parentheses
