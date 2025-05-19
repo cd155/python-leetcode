@@ -1,7 +1,8 @@
 import unittest
 from neetcode75 import \
     two_sum_return_values, two_sum_return_indexes, two_sum_return_all_index_pairs, \
-    valid_parentheses
+    valid_parentheses, \
+    max_profit    
 
 class TestTwoSum(unittest.TestCase):
 
@@ -25,6 +26,12 @@ class TestValidParentheses(unittest.TestCase):
         self.assertEqual(valid_parentheses('{()[]}'), True)
         self.assertEqual(valid_parentheses('{(]}'), False)
         self.assertEqual(valid_parentheses('([])'), True)
+
+class TestMaxProfit(unittest.TestCase):
+
+    def test_max_profit(self):
+        self.assertEqual(max_profit([10,1,5,6,7,1]), 6)
+        self.assertEqual(max_profit([10,8,7,5,2]), 0)
 
 if __name__ == '__main__':
     unittest.main()
