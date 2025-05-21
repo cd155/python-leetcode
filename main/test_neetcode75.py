@@ -42,7 +42,9 @@ class TestIsDuplicate(unittest.TestCase):
         self.assertEqual(is_duplicate_with_set([5,3,6]), False)
 
     def test_is_duplicate_with_sort(self):
-        pass
+        self.assertEqual(is_duplicate_with_sort([]), False)
+        self.assertEqual(is_duplicate_with_sort([1,4,1]), True)
+        self.assertEqual(is_duplicate_with_sort([5,3,6]), False)
 
 if __name__ == '__main__':
     unittest.main()

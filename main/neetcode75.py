@@ -106,7 +106,13 @@ def is_duplicate_with_set(nums):
   return False
 
 def is_duplicate_with_sort(nums):
-  pass
+  nums.sort()
+  
+  for i in range(1, len(nums)):
+    if nums[i-1] == nums[i]:
+      return True
+
+  return False
 
 '''
 4. Product of Array Except Self
