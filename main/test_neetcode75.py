@@ -3,7 +3,7 @@ from neetcode75 import \
     two_sum_return_values, two_sum_return_indexes, two_sum_return_all_index_pairs, \
     valid_parentheses, \
     max_profit, \
-    is_duplicate
+    is_duplicate_with_set, is_duplicate_with_sort
 
 class TestTwoSum(unittest.TestCase):
 
@@ -36,10 +36,13 @@ class TestMaxProfit(unittest.TestCase):
 
 class TestIsDuplicate(unittest.TestCase):
 
-    def test_is_duplicate(self):
-        self.assertEqual(is_duplicate([]), False)
-        self.assertEqual(is_duplicate([1,4,1]), True)
-        self.assertEqual(is_duplicate([5,3,6]), False)
+    def test_is_duplicate_with_set(self):
+        self.assertEqual(is_duplicate_with_set([]), False)
+        self.assertEqual(is_duplicate_with_set([1,4,1]), True)
+        self.assertEqual(is_duplicate_with_set([5,3,6]), False)
+
+    def test_is_duplicate_with_sort(self):
+        pass
 
 if __name__ == '__main__':
     unittest.main()

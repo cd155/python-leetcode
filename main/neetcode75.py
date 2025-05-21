@@ -95,16 +95,18 @@ def max_profit(prices):
 
 Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
 '''
-def is_duplicate(nums):
+def is_duplicate_with_set(nums):
   mySet = set()
 
   for num in nums:
     if num in mySet:
       return True
-    else:
-      mySet.add(num)
+    mySet.add(num)
 
   return False
+
+def is_duplicate_with_sort(nums):
+  pass
 
 '''
 4. Product of Array Except Self
