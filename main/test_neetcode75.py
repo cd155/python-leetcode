@@ -2,7 +2,8 @@ import unittest
 from neetcode75 import \
     two_sum_return_values, two_sum_return_indexes, two_sum_return_all_index_pairs, \
     valid_parentheses, \
-    max_profit    
+    max_profit, \
+    is_duplicate
 
 class TestTwoSum(unittest.TestCase):
 
@@ -32,6 +33,13 @@ class TestMaxProfit(unittest.TestCase):
     def test_max_profit(self):
         self.assertEqual(max_profit([10,1,5,6,7,1]), 6)
         self.assertEqual(max_profit([10,8,7,5,2]), 0)
+
+class TestIsDuplicate(unittest.TestCase):
+
+    def test_is_duplicate(self):
+        self.assertEqual(is_duplicate([]), False)
+        self.assertEqual(is_duplicate([1,4,1]), True)
+        self.assertEqual(is_duplicate([5,3,6]), False)
 
 if __name__ == '__main__':
     unittest.main()
