@@ -93,18 +93,24 @@ def max_profit(prices):
 '''
 3. Contains Duplicate
 
-neetcode75.isDuplicate([])      -> False
-neetcode75.isDuplicate([1,4,1]) -> True
-neetcode75.isDuplicate([5,3,6]) -> False
+Given an integer array nums, return true if any value appears more than once in the array, otherwise return false.
 '''
-def isDuplicate(nums):
+def is_duplicate_with_set(nums):
   mySet = set()
 
   for num in nums:
     if num in mySet:
       return True
-    else:
-      mySet.add(num)
+    mySet.add(num)
+
+  return False
+
+def is_duplicate_with_sort(nums):
+  nums.sort()
+  
+  for i in range(1, len(nums)):
+    if nums[i-1] == nums[i]:
+      return True
 
   return False
 
