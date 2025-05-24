@@ -141,17 +141,16 @@ Given an array of integers nums, find the subarray with the largest sum and retu
 A subarray is a contiguous non-empty sequence of elements within an array.
 '''
 def max_sub_array(nums):
-  if nums == []: return 0
-
-  maxS, curS= nums[0], 0
+  max_sum = nums[0]
+  cur = 0
 
   for num in nums:
-    if curS < 0:
-      curS = 0
-    curS += num
-    maxS = max(maxS, curS)
+    cur += num
+    max_sum = max(max_sum, cur)
+    if cur < 0:
+      cur = 0
 
-  return maxS
+  return max_sum
 
 '''
 6. Maximum Product Sub-array
