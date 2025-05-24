@@ -3,7 +3,8 @@ from neetcode75 import \
     two_sum_return_values, two_sum_return_indexes, two_sum_return_all_index_pairs, \
     valid_parentheses, \
     max_profit, \
-    is_duplicate_with_set, is_duplicate_with_sort
+    is_duplicate_with_set, is_duplicate_with_sort, \
+    product_except_self
 
 class TestTwoSum(unittest.TestCase):
 
@@ -45,6 +46,13 @@ class TestIsDuplicate(unittest.TestCase):
         self.assertEqual(is_duplicate_with_sort([]), False)
         self.assertEqual(is_duplicate_with_sort([1,4,1]), True)
         self.assertEqual(is_duplicate_with_sort([5,3,6]), False)
+
+class TestProductExceptSelf(unittest.TestCase):
+    
+    def test_product_except_self(self):
+        self.assertEqual(product_except_self([]), [])
+        self.assertEqual(product_except_self([1,2,4,6]), [48,24,12,8])
+        self.assertEqual(product_except_self([-1,0,1,2,3]), [0,-6,0,0,0])
 
 if __name__ == '__main__':
     unittest.main()

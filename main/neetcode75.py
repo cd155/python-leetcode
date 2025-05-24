@@ -117,18 +117,17 @@ def is_duplicate_with_sort(nums):
 '''
 4. Product of Array Except Self
 
-neetcode75.productExceptSelf([])        -> None
-neetcode75.productExceptSelf([2,3,4,5]) -> [60,40,30,24]
+Given an integer array nums, return an array output where output[i] is the product of all the elements of nums except nums[i].
 '''
-def productExceptSelf(nums):
-  res = len(nums) * [1]
+def product_except_self(nums):
+  res = [1] * len(nums)
   prefix, postfix = 1, 1
 
-  for i in range(1,len(nums)):
+  for i in range(1, len(nums)):
     prefix *= nums[i-1]
     res[i] = prefix
-  
-  for i in reversed(range(0,len(nums)-1)):
+
+  for i in reversed(range(0, len(nums)-1)):
     postfix *= nums[i+1]
     res[i] *= postfix
 
