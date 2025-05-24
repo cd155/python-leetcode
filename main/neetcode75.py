@@ -120,14 +120,14 @@ def is_duplicate_with_sort(nums):
 Given an integer array nums, return an array output where output[i] is the product of all the elements of nums except nums[i].
 '''
 def product_except_self(nums):
-  res = len(nums) * [1]
+  res = [1] * len(nums)
   prefix, postfix = 1, 1
 
-  for i in range(1,len(nums)):
+  for i in range(1, len(nums)):
     prefix *= nums[i-1]
     res[i] = prefix
-  
-  for i in reversed(range(0,len(nums)-1)):
+
+  for i in reversed(range(0, len(nums)-1)):
     postfix *= nums[i+1]
     res[i] *= postfix
 
