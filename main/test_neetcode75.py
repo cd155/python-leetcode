@@ -60,6 +60,7 @@ class TestMaxSubArray(unittest.TestCase):
     def test_max_sub_array(self):
         self.assertEqual(max_sub_array([-1]), -1)
         self.assertEqual(max_sub_array([2,-3,4,-2,2,1,-1,4]), 8)
-        
+        self.assertEqual(max_sub_array([-2,-1]), -1)
+
 if __name__ == '__main__':
     unittest.main()
