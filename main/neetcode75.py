@@ -136,11 +136,11 @@ def product_except_self(nums):
 '''
 5. Maximum Sum Sub-array
 
-neetcode75.maxSubArray([])                    -> 0
-neetcode75.maxSubArray([-2,3,-1,4,-10,2,3,4]) -> 9
-neetcode75.maxSubArray([-2,-1])               -> -1
+Given an array of integers nums, find the subarray with the largest sum and return the sum.
+
+A subarray is a contiguous non-empty sequence of elements within an array.
 '''
-def maxSubArray(nums):
+def max_sub_array(nums):
   if nums == []: return 0
 
   maxS, curS= nums[0], 0
