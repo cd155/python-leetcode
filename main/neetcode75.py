@@ -140,7 +140,7 @@ Given an array of integers nums, find the subarray with the largest sum and retu
 
 A subarray is a contiguous non-empty sequence of elements within an array.
 '''
-def max_sub_array(nums):
+def max_sum_of_sub_array(nums):
   max_sum = nums[0]
   cur = 0
 
@@ -155,12 +155,9 @@ def max_sub_array(nums):
 '''
 6. Maximum Product Sub-array
 
-neetcode75.maxProduct([2,3,-2,4]) -> 6
-neetcode75.maxProduct([-2,0,-1])  -> 0
-neetcode75.maxProduct([3,-1,4])   -> 4
-neetcode75.maxProduct([-2,-1,-3]) -> 3
+Given an integer array nums, find a subarray that has the largest product within the array and return it.
 '''
-def maxProduct(nums):
+def max_product_of_sub_arry(nums):
   res = max(nums)
   curMin, curMax = 1, 1
 
