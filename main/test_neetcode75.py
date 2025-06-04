@@ -6,7 +6,8 @@ from neetcode75 import \
     is_duplicate_with_set, is_duplicate_with_sort, \
     product_except_self, \
     max_sum_of_sub_array, \
-    max_product_of_sub_arry
+    max_product_of_sub_arry, \
+    find_min_in_rotated_sorted_array
 
 class TestTwoSum(unittest.TestCase):
 
@@ -68,6 +69,13 @@ class TestMaxProductOfSubArray(unittest.TestCase):
     def test_max_product_of_sub_array(self):
         self.assertEqual(max_product_of_sub_arry([1,2,-3,4]), 4)
         self.assertEqual(max_product_of_sub_arry([-2,-1]), 2)
+
+class TestFindMinInRotatedSortedArray(unittest.TestCase):
+    
+    def test_find_min_in_rotated_sorted_array(self):
+        self.assertEqual(find_min_in_rotated_sorted_array([3,4,5,6,1,2]), 1)
+        self.assertEqual(find_min_in_rotated_sorted_array([4,5,0,1,2,3]), 0)
+        self.assertEqual(find_min_in_rotated_sorted_array([4,5,6,7]), 4)
 
 if __name__ == '__main__':
     unittest.main()

@@ -174,38 +174,12 @@ def max_product_of_sub_arry(nums):
 '''
 7. Find Minimum in Rotated Sorted Array
 
-neetcode75.findMin([3,4,5,1,2])     -> 1
-neetcode75.findMin([4,5,6,7,0,1,2]) -> 0
-neetcode75.findMin([11,13,15,17])   -> 11
+Given an array of length n which was originally sorted in ascending order. It has now been rotated between 1 and n times.
+Assuming all elements in the rotated sorted array nums are unique, return the minimum element of this array.
 '''
 
-def findTarget(nums, target): # binary search
-  l, r = 0, len(nums)
-
-  while(l != r):
-    mid = (r - l)//2 + l
-    if target <= nums[mid]:
-      r = mid
-    else:
-      l = mid + 1
-
-  return l # return index
-
-
-def findMin(nums):
-  l, r = 0, len(nums)-1
-
-  while(l != r):
-    mid = (r - l)//2 + l
-    if nums[l] <= nums[mid]: 
-      if nums[l] <= nums[r]:  # no rotate
-        r = mid
-      else:                   # rotated
-        l = mid + 1
-    else:
-      r = mid
-  
-  return nums[l] # return value
+def find_min_in_rotated_sorted_array(nums):
+  pass
 
 '''
 8. Search in Rotated Sorted Array
