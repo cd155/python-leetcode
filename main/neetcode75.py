@@ -159,12 +159,15 @@ Given an integer array nums, find a subarray that has the largest product within
 '''
 def max_product_of_sub_arry(nums):
   res = max(nums)
-  curMin, curMax = 1, 1
+  min_now, max_now = 1, 1
 
   for num in nums:
-    tmpMax, tmpMin = curMax * num, curMin * num
-    curMax, curMin = max(tmpMax, tmpMin, num), min(tmpMax, tmpMin, num)
-    res = max(res, curMax)
+    temp_min = num * min_now
+    temp_max = num * max_now
+
+    min_now = min(temp_min, temp_max, num)
+    max_now = max(temp_min, temp_max, num)
+    res = max(max_now, num)
 
   return res
 
